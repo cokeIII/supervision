@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION["people_id"]) && !isset($_SESSION["user"])) {
+if (!isset($_SESSION["people_id"])) {
     header("location: index.php");
 }
 header('Content-Type: text/html; charset=utf-8');
