@@ -164,7 +164,7 @@ $F = mysqli_query($connect, $sql2);
                         std_id: $(this).val()
                     },
                     success: function(result) {
-                        if (result.grade_name != "null") {
+                        if (result.grade_name != null) {
                             $(".std_name").val(result.prefix_name + result.stu_fname + " " + result.stu_lname);
                             $(".std_level").val(result.grade_name + "/" + result.student_group_no);
                             $(".std_department").val(result.major_name);
