@@ -1,0 +1,33 @@
+.bg-nav {
+    background: #691515;
+    /* background: -webkit-linear-gradient(right, #992626, #1d3881);
+    background: -o-linear-gradient(right, #b61e1e, #112a70);
+    background: -moz-linear-gradient(right, #b61e1e, #112a70);
+    background: linear-gradient(right, #b61e1e, #112a70); */
+}
+
+.color-logout {
+    color: rgb(255, 249, 249) !important;
+}
+
+.color-logout:hover {
+    color: rgb(197, 91, 91) !important;
+}
+
+.link-text {
+    font-size: 17px;
+    color: aliceblue !important;
+}
+
+.link-text:hover {
+    color: rgb(162, 164, 167) !important;
+}
+
+.text-name {
+    color: rgb(255, 249, 249) !important;
+    /* width: 250px !important; */
+}
+
+.title-name {
+    color: azure !important;
+}
