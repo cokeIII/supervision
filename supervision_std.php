@@ -57,7 +57,7 @@ $F = mysqli_query($connect, $sql2);
                 <?php //print_r($_SESSION["super_data"]);
                 ?>
                 </pre>
-                <form method="post" id="stdDataForm"action="make_data_std.php" enctype="multipart/form-data">
+                <form method="post" id="stdDataForm" action="make_data_std.php" enctype="multipart/form-data">
                     <div id="stdData">
                         <div class="std-item">
                             <h5 class="font-black">นักเรียน/นักศึกษา ลำดับที่ <?php echo (empty($_SESSION["super_data"]["std_data"]) ? "1" : count($_SESSION["super_data"]["std_data"]) + 1); ?></h5>
@@ -135,9 +135,9 @@ $F = mysqli_query($connect, $sql2);
                 <hr>
                 <!-- <form action="make_data_std.php" method="post">
                     <input type="hidden" name="send" value="ok"> -->
-                    <div class="send-center">
-                        <button type="button" id="sendData" class="btn btn-success text-center"><i class="fa fa-file-text" aria-hidden="true"></i> ส่งข้อมูลเพื่อทำรายงาน</button>
-                    </div>
+                <div class="send-center">
+                    <button type="button" id="sendData" class="btn btn-success text-center"><i class="fa fa-file-text" aria-hidden="true"></i> ส่งข้อมูลเพื่อทำรายงาน</button>
+                </div>
                 <!-- </form> -->
             </div>
         </div>
@@ -164,9 +164,11 @@ $F = mysqli_query($connect, $sql2);
                         std_id: $(this).val()
                     },
                     success: function(result) {
-                        $(".std_name").val(result.prefix_name + result.stu_fname + " " + result.stu_lname);
-                        $(".std_level").val(result.grade_name + "/" + result.student_group_no);
-                        $(".std_department").val(result.major_name);
+                        if (result.major_name != "") {
+                            $(".std_name").val(result.prefix_name + result.stu_fname + " " + result.stu_lname);
+                            $(".std_level").val(result.grade_name + "/" + result.student_group_no);
+                            $(".std_department").val(result.major_name);
+                        }
                     }
                 });
             }
