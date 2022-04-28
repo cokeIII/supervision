@@ -48,6 +48,7 @@ $_SESSION["super_data"] = array();
                             <th>วันเวลา</th>
                             <th></th>
                             <th></th>
+                            <th>เลือกสำหรับพิมพ์บันทึกข้อความ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,12 +64,18 @@ $_SESSION["super_data"] = array();
                                 <td><?php echo $row2["date_time"]; ?></td>
                                 <td><a href="reportPDF.php?date_time=<?php echo $row2["date_time"]; ?>&business=<?php echo $row2["business"]; ?>" class="btn btn-info" target="_blank"><i class="fa fa-file-text" aria-hidden="true"></i> พิมพ์รายงาน</a></td>
                                 <td><button date_time="<?php echo $row2["date_time"]; ?>" business="<?php echo $row2["business"]; ?>" class="btn btn-danger delItem"><i class="fa fa-trash-o" aria-hidden="true"></i> ลบรายการ</button></td>
+                                <td><input date_time="<?php echo $row2["date_time"]; ?>" business="<?php echo $row2["business"]; ?>" type="checkbox" name="selected_data[]" class="selected_data"></td>
                             </tr>
                         <?php
                         }
                         ?>
                     </tbody>
                 </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button id="saveMsg" class="btn btn-primary mt-2 float-right"><i class="fa fa-file-text" aria-hidden="true"></i> บันทึกข้อความ</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -77,6 +84,24 @@ $_SESSION["super_data"] = array();
 <?php include "footer.php"; ?>
 <script>
     $(document).ready(function() {
+        let selected_data = []
+        $("#saveMsg").click(function() {
+            let i = 0
+            $('.selected_data:checkbox:checked').each(function() {
+                var status = (this.checked ? $(this).val() : "")
+                var date_time = $(this).attr("date_time")
+                var business = $(this).attr("business")
+                selected_data[i] = {
+                    date_time: $(this).attr("date_time"),
+                    business: $(this).attr("business")
+                }
+                i++;
+
+            });
+            $.redirect("form_reportPDF2.php", {
+                selected_data: selected_data,
+            }, "POST");
+        })
         $('#data_report').DataTable({
             "scrollX": true
         });

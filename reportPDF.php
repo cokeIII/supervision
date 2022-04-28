@@ -72,7 +72,6 @@ ob_start(); // Start get HTML code
 </head>
 
 <body>
-
   <h2 class="txt-h"><strong><u> แบบรายงานผลการนิเทศ การฝึกงาน ฝึกอาชีพ ออนไลน์</u></strong></h2>
   <table width="100%" class="ta-content">
     <tr>
@@ -113,12 +112,12 @@ ob_start(); // Start get HTML code
   while ($row2 = mysqli_fetch_assoc($que2)) { ?>
     <table width="100%" class="ta-content">
       <tr>
-      <td><strong>รหัสนักศึกษา </strong></td>
-      <td><?php echo $row2["std_id"]; ?></td>
-      <td><strong>ระดับชั้น/กลุ่ม </strong></td>
-      <td><?php echo $row2["std_level"]; ?></td>
-      <td><strong>แผนกวิชา </strong></td>
-      <td><?php echo $row2["std_department"]; ?></td>
+        <td><strong>รหัสนักศึกษา </strong></td>
+        <td><?php echo $row2["std_id"]; ?></td>
+        <td><strong>ระดับชั้น/กลุ่ม </strong></td>
+        <td><?php echo $row2["std_level"]; ?></td>
+        <td><strong>แผนกวิชา </strong></td>
+        <td><?php echo $row2["std_department"]; ?></td>
       </tr>
     </table>
     <p class="ta-content"><strong>รูปภาพขณะทำการปฐมนิเทศ</strong></p>
