@@ -11,7 +11,7 @@ $_SESSION["super_data"]["std_data"][$index]["std_level"] = $_POST["std_level"];
 $_SESSION["super_data"]["std_data"][$index]["std_department"] = $_POST["std_department"];
 $target_dir = "uploads_img/";
 $pic_name = $_POST["std_id"] . "_" . $people_id . "_" . str_replace("-", "", str_replace(":", "", str_replace("/", "", $_SESSION["super_data"]["date_time"]))) . ".jpg";
-$target_file = $target_dir . $pic_name;
+$target_file = $target_dir . trim($pic_name);
 $uploadOk = 1;
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
