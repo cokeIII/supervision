@@ -95,7 +95,8 @@ ob_start(); // Start get HTML code
     @page {
       margin-top: 11.33px;
     }
-    .mt-top{
+
+    .mt-top {
       margin-top: 20px;
     }
   </style>
@@ -242,18 +243,22 @@ $all_feedback = $_POST["all_feedback"];
       <td>สรุปผลการนิเทศหรือประเด็นที่พบ พร้อมแนวทางการแก้ไข</td>
     </tr>
     <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo str_replace("-", "\n-", $all_conclusion); ?></td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo str_replace("-", "<br/>-", $all_conclusion); ?></td>
     </tr>
     <tr>
       <td>ข้อเสนอแนะหรือประเด็นที่ต้องการได้รับคำแนะนำจากผู้บังคับบัญชา</td>
     </tr>
     <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo str_replace("-", "\n-", $all_feedback); ?></td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo str_replace("-", "<br/>-", $all_feedback); ?></td>
     </tr>
     <tr>
       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;จึงเรียนมาเพื่อโปรดพิจารณา</td>
     </tr>
   </table>
+  <br>
+  <br>
+  <br>
+  <br>
   <table width="100%" class="ta-content mt-top">
     <tr>
       <td width="60%"></td>
@@ -265,6 +270,7 @@ $all_feedback = $_POST["all_feedback"];
     </tr>
   </table>
   <pagebreak></pagebreak>
+  <br>
   <br>
   <br>
   <br>
