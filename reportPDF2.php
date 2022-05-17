@@ -95,6 +95,9 @@ ob_start(); // Start get HTML code
     @page {
       margin-top: 11.33px;
     }
+    .mt-top{
+      margin-top: 20px;
+    }
   </style>
 </head>
 <?php
@@ -239,20 +242,19 @@ $all_feedback = $_POST["all_feedback"];
       <td>สรุปผลการนิเทศหรือประเด็นที่พบ พร้อมแนวทางการแก้ไข</td>
     </tr>
     <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo str_replace("-", " -", $all_conclusion); ?></td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo str_replace("-", "\r\n-", $all_conclusion); ?></td>
     </tr>
     <tr>
       <td>ข้อเสนอแนะหรือประเด็นที่ต้องการได้รับคำแนะนำจากผู้บังคับบัญชา</td>
     </tr>
     <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo str_replace("-", " -", $all_feedback); ?></td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo str_replace("-", "\r\n-", $all_feedback); ?></td>
     </tr>
     <tr>
       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;จึงเรียนมาเพื่อโปรดพิจารณา</td>
     </tr>
   </table>
-  <pagebreak></pagebreak>
-  <table width="100%" class="ta-content">
+  <table width="100%" class="ta-content mt-top">
     <tr>
       <td width="60%"></td>
       <td class="txt-center">ลงชื่อ....................................................................</td>
