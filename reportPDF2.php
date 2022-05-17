@@ -254,8 +254,6 @@ $all_feedback = $_POST["all_feedback"];
       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;จึงเรียนมาเพื่อโปรดพิจารณา</td>
     </tr>
   </table>
-  <pagebreak></pagebreak>
-  <br>
   <table width="100%" class="ta-content mt-top">
     <tr>
       <td width="60%"></td>
@@ -266,6 +264,9 @@ $all_feedback = $_POST["all_feedback"];
       <td class="txt-center">(<?php echo $people_name; ?>) ครูนิเทศก์</td>
     </tr>
   </table>
+  <pagebreak></pagebreak>
+  <br>
+  <br>
   <br>
   <table width="100%" class="ta-content">
     <tr>
