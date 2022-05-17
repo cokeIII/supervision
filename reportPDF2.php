@@ -251,6 +251,7 @@ $all_feedback = $_POST["all_feedback"];
       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;จึงเรียนมาเพื่อโปรดพิจารณา</td>
     </tr>
   </table>
+  <pagebreak></pagebreak>
   <table width="100%" class="ta-content">
     <tr>
       <td width="60%"></td>
