@@ -242,18 +242,20 @@ $all_feedback = $_POST["all_feedback"];
       <td>สรุปผลการนิเทศหรือประเด็นที่พบ พร้อมแนวทางการแก้ไข</td>
     </tr>
     <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo str_replace("-", "\r\n-", $all_conclusion); ?></td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo str_replace("-", "\n-", $all_conclusion); ?></td>
     </tr>
     <tr>
       <td>ข้อเสนอแนะหรือประเด็นที่ต้องการได้รับคำแนะนำจากผู้บังคับบัญชา</td>
     </tr>
     <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo str_replace("-", "\r\n-", $all_feedback); ?></td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo str_replace("-", "\n-", $all_feedback); ?></td>
     </tr>
     <tr>
       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;จึงเรียนมาเพื่อโปรดพิจารณา</td>
     </tr>
   </table>
+  <pagebreak></pagebreak>
+  <br>
   <table width="100%" class="ta-content mt-top">
     <tr>
       <td width="60%"></td>
