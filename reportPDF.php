@@ -8,7 +8,11 @@ require_once 'connect.php';
 $date_time = $_GET["date_time"];
 $arrDate = explode(" ", $date_time);
 $business = $_GET["business"];
-$people_id = $_SESSION["people_id"];
+if (empty($_SESSION["people_id"])) {
+  $people_id = $_GET["people_id"];
+} else {
+  $people_id = $_SESSION["people_id"];
+}
 $people_dep_name = $_SESSION["people_dep_name"];
 $people_name = $_SESSION["people_name"];
 $sql = "select * from data_report where date_time='$date_time' and business='$business' and people_id='$people_id'";
