@@ -39,7 +39,8 @@
     .icon-color {
         color: black;
     }
-    .h-auto{
+
+    .h-auto {
         height: 100%;
         width: 100%;
         position: absolute;
@@ -52,17 +53,25 @@
     <?php
     require_once "menu.php";
     require_once "../connect.php";
+    if (!empty($_POST["date_time_1"]) && !empty($_POST["date_time_2"])) {
+        $date1 = $_POST["date_time_1"];
+        $date2 = $_POST["date_time_2"];
+        $sql = "select * from data_report d
+        inner join people p on p.people_id = d.people_id
+        where date_time between date('$date1')  and date('$date2')
+        ";
+    } else {
+        $sql = "select * from data_report d
+        inner join people p on p.people_id = d.people_id
+        ";
+    }
 
-    $sql = "select upl.*, peo.people_name, peo.people_surname, peo.people_id, count(upl.people_id) as countRow
-    from 
-    upload_data upl left join people peo 
-    on upl.people_id = peo.people_id 
-    where upl.learn_date = CURDATE() group by upl.people_id";
-
-    $result = $connect->query($sql);
-    $sqlDep = "select * from people_dep WHERE `people_depgroup_id`=3";
-    $resultDep = $connect->query($sqlDep);
-
+    $sqlDMin = "select date_time from data_report order by date_time limit 1";
+    $resDMin = mysqli_query($connect, $sqlDMin);
+    $rowDMin = mysqli_fetch_array($resDMin);
+    $dateMin = explode(" ",$rowDMin["date_time"])[0];
+    $dateMax = date("Y-m-d");
+    $result = mysqli_query($connect, $sql);
     ?>
     <div class="main">
 
@@ -71,56 +80,49 @@
                 <div class="signup-img">
                     <img src="../images/2.jpg" alt="" class="h-auto">
                     <div class="signup-img-content">
-                        <h2>สรุปการสอนออนไลน์</h2>
+                        <h2>สรุปการติดตามการนิเทศฝึกงาน</h2>
                         <p>วิทยาลัยเทคนิคชลบุรี</p>
                     </div>
                 </div>
                 <div class="signup-form">
-                    <form action="pdf.php" method="post">
-                        <div class="row mt-5 ml-3">
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="day1">วันที่</label>
-                                    <input class="form-control" type="date" name="date1" id="day1" value="<?php echo date('Y-m-d'); ?>">
-                                </div>
+                    <form method="post" action="../report_all_word.php" target="_blank">
+                        <input type="hidden" name="date_time_1" value="<?php echo (!empty($_POST["date_time_1"]) ? $_POST["date_time_1"] : $dateMin); ?>" required>
+                        <input type="hidden" name="date_time_2" value="<?php echo (!empty($_POST["date_time_2"]) ? $_POST["date_time_2"] : $dateMax); ?>" required>
+                        <div class="row mt-5">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary float-right">พิมพ์รายงานสรุป</button>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="day2">ถึง วันที่</label>
-                                    <input class="form-control" type="date" name="date2" id="day2" value="<?php echo date('Y-m-d'); ?>">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="dep">แผนกวิชา</label>
-                                    <select class="form-control" id="dep" name="dep">
-                                        <option value="">ทุกแผนกวิชา</option>
-                                        <?php
-                                        if ($resultDep->num_rows > 0) {
-                                            while ($rowDep = $resultDep->fetch_assoc()) {
-                                        ?>
-                                                <option value="<?php echo $rowDep["people_dep_id"]; ?>"><?php echo $rowDep["people_dep_name"]; ?></option>
-                                        <?php
-                                            }
-                                        } ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-success mt-3" type="submit"><i class="fa fa-file-pdf-o icon-color"></i></button>
-                            </div>
-
                         </div>
                     </form>
-                    <div class="row dur-table p-4 mt-3">
+                    <form action="index.php" method="post">
+
+                        <div class="row p-4 mt-3">
+                            <div class="col-md-2">
+                                <h5>ตั้งแต่วันที่</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="date" name="date_time_1" id="date_time_1" value="<?php echo (!empty($_POST["date_time_1"]) ? $_POST["date_time_1"] : $dateMin); ?>">
+                            </div>
+                            <div class="col-md-2">
+                                <h5>ถึงวันที่</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="date" name="date_time_2" id="date_time_2" value="<?php echo (!empty($_POST["date_time_2"]) ? $_POST["date_time_2"] : $dateMax); ?>">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-success"> เลือกวันที่ </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row dur-table p-4 mt-2">
                         <div class="col-md-12" id="contentData">
                             <table class="table" id="durTable">
                                 <thead>
                                     <tr>
                                         <th>ที่</th>
-                                        <th>ชื่อครูผู้สอน</th>
-                                        <th>จำนวนรายการที่สอน</th>
+                                        <th>ชื่อครูนิเทศ</th>
+                                        <th>ชื่อสถานประกอบการ</th>
+                                        <th>วันเวลา</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -133,8 +135,9 @@
                                             <tr>
                                                 <td><?php echo ++$i; ?></td>
                                                 <td><?php echo $row["people_name"] . "  " . $row["people_surname"]; ?></td>
-                                                <td><?php echo $row["countRow"]; ?></td>
-                                                <td><button class="btn btn-primary"><a href="../showLean.php?people_id=<?php echo $row["people_id"];?>&people_name=<?php echo $row["people_name"];?>&people_surname=<?php echo $row["people_surname"]; ?>"><i class="fa fa-list icon-color"></i></a></button></td>
+                                                <td><?php echo $row["business"]; ?></td>
+                                                <td><?php echo $row["date_time"]; ?></td>
+                                                <td><a href="../reportPDF.php?people_id=<?php echo $row["people_id"]; ?>&date_time=<?php echo $row["date_time"]; ?>&business=<?php echo $row["business"]; ?>" class="btn btn-info" target="_blank"><i class="fa fa-file-text" aria-hidden="true"></i> พิมพ์รายงาน</a></td>
                                             </tr>
                                     <?php
                                         }
@@ -169,53 +172,5 @@
 <script>
     $(document).ready(function() {
         $("#durTable").DataTable()
-        $("#day1").change(function() {
-            $.ajax({
-                dataType: 'json',
-                type: "POST",
-                url: "getData.php",
-                data: {
-                    date1: $("#day1").val(),
-                    date2: $("#day2").val(),
-                    dep: $("#dep").val()
-                },
-                success: function(result) {
-                    $("#contentData").html(result)
-                    $("#durTable").DataTable()
-                }
-            });
-        })
-        $("#day2").change(function() {
-            $.ajax({
-                dataType: 'json',
-                type: "POST",
-                url: "getData.php",
-                data: {
-                    date1: $("#day1").val(),
-                    date2: $("#day2").val(),
-                    dep: $("#dep").val()
-                },
-                success: function(result) {
-                    $("#contentData").html(result)
-                    $("#durTable").DataTable()
-                }
-            })
-        })
-        $("#dep").change(function() {
-            $.ajax({
-                type: "POST",
-                url: "getData.php",
-                dataType: 'json',
-                data: {
-                    date1: $("#day1").val(),
-                    date2: $("#day2").val(),
-                    dep: $("#dep").val()
-                },
-                success: function(result) {
-                    $("#contentData").html(result)
-                    $("#durTable").DataTable()
-                }
-            });
-        })
     })
 </script>
