@@ -11,14 +11,31 @@ $business = $_GET["business"];
 if (empty($_SESSION["people_id"])) {
   $people_id = $_GET["people_id"];
 } else {
-  $people_id = $_SESSION["people_id"];
+  $people_id = $_SESSION["people"];
 }
-$people_dep_name = $_SESSION["people_dep_name"];
-$people_name = $_SESSION["people_name"];
-$sql = "select * from data_report where date_time='$date_time' and business='$business' and people_id='$people_id'";
+function getPeople($people_id){
+  global $connect;
+  $sql = "select * from people p 
+  inner join people_pro pro on pro.people_id = p.people_id
+  inner join people_dep dep on dep.people_dep_id = pro.people_dep_id and people_depgroup_id = 3
+  where p.people_id = '$people_id'
+  ";
+  $res = mysqli_query($connect,$sql);
+  $row = mysqli_fetch_array($res);
+  $retArr = [];
+  $retArr["name"] = $row["people_name"] . " " . $row["people_surname"];
+  $retArr["dep"] =  $row["people_dep_name"];
+  return $retArr;
+}
+// $people_dep_name = $_SESSION["people_dep_name"];
+// $people_name = $_SESSION["people_name"];
+$sql = "select *,d.std_id from data_report d
+where d.date_time='$date_time' and d.business='$business' and d.people_id='$people_id'";
 $user_name = $_SESSION["people_name"];
 $que = mysqli_query($connect, $sql);
-
+$peopleData = getPeople($people_id);
+$people_name = $peopleData["name"];
+$people_dep_name = $peopleData["dep"];
 header('Content-Type: text/html; charset=utf-8');
 // เพิ่ม Font ให้กับ mPDF
 $mpdf = new mPDF();
@@ -72,6 +89,10 @@ ob_start(); // Start get HTML code
       /* text-align: center; */
       font-size: 18px;
     }
+
+    .nowa {
+      white-space: nowrap;
+    }
   </style>
 </head>
 
@@ -80,25 +101,25 @@ ob_start(); // Start get HTML code
   <table width="100%" class="ta-content">
     <tr>
       <td><strong>ชื่อ-สกุลครูนิเทศ </strong></td>
-      <td> <?php echo $people_name; ?></td>
+      <td class="nowa"> <?php echo $people_name; ?></td>
       <td><strong>แผนกวิชา </strong></td>
-      <td> <?php echo $people_dep_name; ?></td>
+      <td colspan="3"> <?php echo $people_dep_name; ?></td>
     </tr>
     <tr>
       <td><strong>วัน/เดือน/ปี </strong></td>
       <td> <?php echo DateThai($arrDate[0]); ?></td>
-      <td><strong>เวลา </strong></td>
+      <td colspan="3"><strong>เวลา </strong></td>
       <td> <?php echo $arrDate[1]; ?></td>
     </tr>
     <tr>
       <td><strong>ชื่อสถานประกอบการ </strong></td>
-      <td> <?php echo $business; ?></td>
+      <td colspan="5"> <?php echo $business; ?></td>
     </tr>
     <?php $i = 1;
     while ($row = mysqli_fetch_assoc($que)) { ?>
       <tr>
-        <td><strong><?php echo $i++; ?>. ชื่อ-สกุลนักเรียน นักศึกษา </strong></td>
-        <td><?php echo $row["std_name"]; ?></td>
+        <td class="nowa"><strong><?php echo $i++; ?>. ชื่อ-สกุลนักเรียน นักศึกษา </strong></td>
+        <td colspan="5"><?php echo $row["std_name"]; ?></td>
       </tr>
       <tr>
         <td><strong>รหัสนักศึกษา </strong></td>
