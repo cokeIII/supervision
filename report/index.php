@@ -101,17 +101,17 @@
                             <div class="col-md-2">
                                 <h5>ตั้งแต่วันที่</h5>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 mt-1">
                                 <input type="date" name="date_time_1" id="date_time_1" value="<?php echo (!empty($_POST["date_time_1"]) ? $_POST["date_time_1"] : $dateMin); ?>">
                             </div>
                             <div class="col-md-2">
                                 <h5>ถึงวันที่</h5>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 mt-1">
                                 <input type="date" name="date_time_2" id="date_time_2" value="<?php echo (!empty($_POST["date_time_2"]) ? $_POST["date_time_2"] : $dateMax); ?>">
                             </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-success mt-2"> เลือกวันที่ </button>
+                            <div class="col-md-2 mt-1">
+                                <button class="btn btn-success "> เลือกวันที่ </button>
                             </div>
                         </div>
                     </form>
