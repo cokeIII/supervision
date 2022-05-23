@@ -47,6 +47,7 @@
         right: 0;
         top: 0;
     }
+
 </style>
 
 <body>
@@ -110,7 +111,7 @@
                                 <input type="date" name="date_time_2" id="date_time_2" value="<?php echo (!empty($_POST["date_time_2"]) ? $_POST["date_time_2"] : $dateMax); ?>">
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-success"> เลือกวันที่ </button>
+                                <button class="btn btn-success mt-2"> เลือกวันที่ </button>
                             </div>
                         </div>
                     </form>
