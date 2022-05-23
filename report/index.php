@@ -104,7 +104,7 @@
                             <div class="col-md-3 mt-1">
                                 <input type="date" name="date_time_1" id="date_time_1" value="<?php echo (!empty($_POST["date_time_1"]) ? $_POST["date_time_1"] : $dateMin); ?>">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 mt-1">
                                 <h5>ถึงวันที่</h5>
                             </div>
                             <div class="col-md-3 mt-1">
