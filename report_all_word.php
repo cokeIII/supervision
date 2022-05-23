@@ -109,7 +109,7 @@ $que = mysqli_query($connect, $sql);
                 if (file_exists( 'uploads_img/' . $rowData["pic"])) {
                     $images = 'uploads_img/' . $rowData["pic"];
                     $new_images = 'MyResize/' . $rowData["pic"];
-                    $width = 100; //*** Fix Width & Heigh (Autu caculate) ***//
+                    $width = 250; //*** Fix Width & Heigh (Autu caculate) ***//
                     $size = GetimageSize($images);
                     $height = round($width * $size[1] / $size[0]);
                     // convertImage('uploads_img/' . $rowData["pic"], 'uploads_img/' . $rowData["pic"], 100);
@@ -132,7 +132,7 @@ $que = mysqli_query($connect, $sql);
                     <td><?php echo $j; ?></td>
                     <td class="no-w"><?php echo $rowData["std_name"]; ?></td>
                     <td><?php echo $rowData["conclusion"]; ?></td>
-                    <td width="100" height="auto"><img src="<?php echo $base64; ?>" alt="" width="100" height="auto"></td>
+                    <td width="200" height="auto"><img src="<?php echo $base64; ?>" alt="" width="200" height="auto"></td>
                 </tr>
             <?php $j++;
             } ?>
