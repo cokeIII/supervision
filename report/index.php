@@ -47,7 +47,6 @@
         right: 0;
         top: 0;
     }
-
 </style>
 
 <body>
@@ -56,7 +55,12 @@
     require_once "../connect.php";
     if (!empty($_POST["date_time_1"]) && !empty($_POST["date_time_2"])) {
         $date1 = $_POST["date_time_1"];
-        $date2 = $_POST["date_time_2"];
+
+        $date = $_POST["date_time_2"];
+        $dateM = str_replace('-', '/', $date);
+        $tomorrow = date('Y-m-d', strtotime($dateM . "+1 days"));
+        $date2 = $tomorrow;
+
         $sql = "select * from data_report d
         inner join people p on p.people_id = d.people_id
         where date_time between date('$date1')  and date('$date2')
@@ -70,7 +74,7 @@
     $sqlDMin = "select date_time from data_report order by date_time limit 1";
     $resDMin = mysqli_query($connect, $sqlDMin);
     $rowDMin = mysqli_fetch_array($resDMin);
-    $dateMin = explode(" ",$rowDMin["date_time"])[0];
+    $dateMin = explode(" ", $rowDMin["date_time"])[0];
     $dateMax = date("Y-m-d");
     $result = mysqli_query($connect, $sql);
     ?>
@@ -96,7 +100,6 @@
                         </div>
                     </form>
                     <form action="index.php" method="post">
-
                         <div class="row p-4 mt-3">
                             <div class="col-md-2">
                                 <h5>ตั้งแต่วันที่</h5>
