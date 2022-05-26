@@ -15,6 +15,24 @@ function DateThai($strDate)
     // return "$strDay $strMonthThai $strYear, $strHour:$strMinute";
     return "$strDay $strMonthThai $strYear";
 }
+function getTypeImg($originalImage)
+{
+    // jpg, png, gif or bmp?
+    $exploded = explode('.', $originalImage);
+    $ext = $exploded[count($exploded) - 1];
+    if (preg_match('/jpg|jpeg/i', $ext))
+        $imageTmp = imagecreatefromjpeg($originalImage);
+    else if (preg_match('/png/i', $ext))
+        $imageTmp = imagecreatefrompng($originalImage);
+    else if (preg_match('/gif/i', $ext))
+        $imageTmp = imagecreatefromgif($originalImage);
+    else if (preg_match('/bmp/i', $ext))
+        $imageTmp = imagecreatefrombmp($originalImage);
+    else
+        return 0;
+    echo $ext;
+    return $imageTmp;
+}
 function convertImage($originalImage, $outputImage, $quality)
 {
     // jpg, png, gif or bmp?
@@ -106,14 +124,15 @@ $que = mysqli_query($connect, $sql);
             $sqlData = "select * from data_report where date_time='$date_time' and business='$business' and people_id='$people_id'";
             $queData = mysqli_query($connect, $sqlData);
             while ($rowData = mysqli_fetch_array($queData)) {
-                if (file_exists( 'uploads_img/' . $rowData["pic"])) {
+                if (file_exists('uploads_img/' . $rowData["pic"])) {
                     $images = 'uploads_img/' . $rowData["pic"];
                     $new_images = 'MyResize/' . $rowData["pic"];
                     $width = 250; //*** Fix Width & Heigh (Autu caculate) ***//
                     $size = GetimageSize($images);
                     $height = round($width * $size[1] / $size[0]);
-                    convertImage('uploads_img/' . $rowData["pic"], 'uploads_img/' . $rowData["pic"], 100);
-                    $images_orig = ImageCreateFromJPEG($images);
+                    // convertImage('uploads_img/' . $rowData["pic"], 'uploads_img/' . $rowData["pic"], 100);
+                    // $images_orig = ImageCreateFromJPEG($images);
+                    $images_orig = getTypeImg($images);
                     $photoX = ImagesX($images_orig);
                     $photoY = ImagesY($images_orig);
                     $images_fin = ImageCreateTrueColor($width, $height);

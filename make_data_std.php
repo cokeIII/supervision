@@ -4,13 +4,14 @@ session_start();
 $index = count($_SESSION["super_data"]["std_data"]);
 
 $people_id = $_SESSION["people_id"];
+$imageFileType = strtolower(pathinfo(basename($_FILES["pic"]["name"]), PATHINFO_EXTENSION));
 
 $_SESSION["super_data"]["std_data"][$index]["std_id"] = $_POST["std_id"];
 $_SESSION["super_data"]["std_data"][$index]["std_name"] = $_POST["std_name"];
 $_SESSION["super_data"]["std_data"][$index]["std_level"] = $_POST["std_level"];
 $_SESSION["super_data"]["std_data"][$index]["std_department"] = $_POST["std_department"];
 $target_dir = "uploads_img/";
-$pic_name = $_POST["std_id"] . "_" . $people_id . "_" . str_replace("-", "", str_replace(":", "", str_replace("/", "", $_SESSION["super_data"]["date_time"]))) . ".jpg";
+$pic_name = $_POST["std_id"] . "_" . $people_id . "_" . str_replace("-", "", str_replace(":", "", str_replace("/", "", $_SESSION["super_data"]["date_time"]))) . "." . $imageFileType;
 $target_file = $target_dir . trim(preg_replace('/\s+/', ' ', $pic_name));
 $uploadOk = 1;
 // Check if $uploadOk is set to 0 by an error

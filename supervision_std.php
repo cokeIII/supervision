@@ -87,7 +87,7 @@ $F = mysqli_query($connect, $sql2);
                     <div class="row">
                         <div class="col-md-5">
                             <label>รูปภาพขณะทำการนิเทศ</label>
-                            <input type="file" id="pic" name="pic" class="form-control" accept="image/jpeg" required>
+                            <input type="file" id="pic" name="pic" class="form-control" accept="image/*" required>
                         </div>
                     </div>
                     <img src="images/no_img.jpg" id="pre_pic" width="350" height="auto" class="mt-2">
