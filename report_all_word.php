@@ -112,7 +112,7 @@ $que = mysqli_query($connect, $sql);
                     $width = 250; //*** Fix Width & Heigh (Autu caculate) ***//
                     $size = GetimageSize($images);
                     $height = round($width * $size[1] / $size[0]);
-                    // convertImage('uploads_img/' . $rowData["pic"], 'uploads_img/' . $rowData["pic"], 100);
+                    convertImage('uploads_img/' . $rowData["pic"], 'uploads_img/' . $rowData["pic"], 100);
                     $images_orig = ImageCreateFromJPEG($images);
                     $photoX = ImagesX($images_orig);
                     $photoY = ImagesY($images_orig);
