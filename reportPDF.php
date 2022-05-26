@@ -11,7 +11,7 @@ $business = $_GET["business"];
 if (empty($_SESSION["people_id"])) {
   $people_id = $_GET["people_id"];
 } else {
-  $people_id = $_SESSION["people"];
+  $people_id = $_SESSION["people_id"];
 }
 function getPeople($people_id){
   global $connect;
