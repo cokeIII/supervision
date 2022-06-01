@@ -37,6 +37,10 @@ $_SESSION["super_data"] = array();
     .bg3 {
         background-image: url("images/3.jpg");
     }
+
+    .nowa {
+        white-space: nowrap;
+    }
 </style>
 <div class="main mt-5">
 
@@ -51,23 +55,28 @@ $_SESSION["super_data"] = array();
             </div>
             <div class="signup-form mt-3 p-2">
                 <table class="table" id="list_super">
-                    <tr>
-                        <th>ลำดับ</th>
-                        <th>รหัสนักศึกษา</th>
-                        <th>ชื่อ - สกุล</th>
-                        <th>สถานประกอบการ</th>
-                        <th></th>
-                    </tr>
-                    <?php $i = 0;
-                    while ($rowList = mysqli_fetch_array($resList)) { ?>
+                    <thead>
                         <tr>
-                            <td><?php echo ++$i; ?></td>
-                            <td><?php echo $rowList["student_id"]; ?></td>
-                            <td><?php echo $rowList["prefix_name"].$rowList["stu_fname"]." ".$rowList["stu_lname"]; ?></td>
-                            <td><?php echo $rowList["business_name"]; ?></td>
-                            <td><button class="btn btn-success">นิเทศ</button></td>
+                            <th>ลำดับ</th>
+                            <th>รหัสนักศึกษา</th>
+                            <th>ชื่อ - สกุล</th>
+                            <th>สถานประกอบการ</th>
+                            <th></th>
                         </tr>
-                    <?php } ?>
+                    </thead>
+                    <tbody>
+                        <?php $i = 0;
+                        while ($rowList = mysqli_fetch_array($resList)) { ?>
+                            <tr>
+                                <td><?php echo ++$i; ?></td>
+                                <td><?php echo $rowList["student_id"]; ?></td>
+                                <td class="nowa"><?php echo $rowList["prefix_name"] . $rowList["stu_fname"] . " " . $rowList["stu_lname"]; ?></td>
+                                <td><?php echo $rowList["business_name"]; ?></td>
+                                <td><button class="btn btn-success">นิเทศ</button></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+
                 </table>
             </div>
         </div>
@@ -77,6 +86,10 @@ $_SESSION["super_data"] = array();
 <?php include "footer.php"; ?>
 <script>
     $(document).ready(function() {
-        $('#list_super').DataTable();
+        $('#list_super').DataTable({
+            "scrollX": true
+        });
+        // $('#container').css('display', 'block');
+        table.columns.adjust().draw();
     });
 </script>
