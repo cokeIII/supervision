@@ -21,5 +21,5 @@
 			$_SESSION["people_name"] = $objResult["people_name"]." ".$objResult["people_surname"];
 			$_SESSION["people_id"] = $objResult["people_id"];
 			//echo "<meta http-equiv='refresh' content='0;url= company.php'>";
-			header("location: supervision_bus.php");
+			header("location: list_super.php");
 		}
